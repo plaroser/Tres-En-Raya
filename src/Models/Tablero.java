@@ -114,7 +114,7 @@ public class Tablero {
 			for (char valorColumna : valorFila) {
 				aux += ((valorColumna == '0') ? '-' : valorColumna) + "|";
 			}
-			aux += "\n-------";
+			aux += "\n-------\n";
 		}
 		return aux;
 	}

@@ -9,6 +9,7 @@ public class TestJuego {
 	public static void main(String[] args) {
 		Tablero t1 = new Tablero();
 		Jugador j1 = new Jugador(true);
+		int jugadas = 0;
 		boolean terminado = false;
 		int[] coordenadas = new int[2];
 		boolean movimientoValido = false;
@@ -26,11 +27,18 @@ public class TestJuego {
 					movimientoValido = (t1.movimientoValido(coordenadas[0] - 1, coordenadas[1] - 1));
 					t1.mueveJugador(j1, (coordenadas[0] - 1), (coordenadas[1] - 1));
 				} while (!movimientoValido);
-				if(t1.comprobar_ganador('X')){break;}
+				if (t1.comprobar_ganador('X')) {
+					break;
+				}
+				if (t1.comprobar_ganador('X')) {
+					break;
+				}
+				jugadas++;
 				System.out.println("Movimiento de la maquina.");
 				t1.movimientoAutomatico(maq);
 				terminado = (t1.comprobar_ganador('X')) || (t1.comprobar_ganador('O'));
 				System.out.println(t1);
+				jugadas++;
 			} while (!terminado);
 			if (t1.comprobar_ganador('X')) {
 				System.out.println("Le has ganado a la maquina :)");
@@ -39,7 +47,8 @@ public class TestJuego {
 			}
 			break;
 		case 2:
-			Jugador j2 = new Jugador (false);
+			
+			Jugador j2 = new Jugador(false);
 			do {
 				System.out.println("Movimiento jugador 1.");
 				do {
@@ -48,7 +57,14 @@ public class TestJuego {
 					t1.mueveJugador(j1, (coordenadas[0] - 1), (coordenadas[1] - 1));
 				} while (!movimientoValido);
 				System.out.println(t1);
-				if(t1.comprobar_ganador('X')){break;}
+				if (t1.comprobar_ganador('X')) {
+					break;
+				}
+				jugadas++;
+				if (jugadas == 9) {
+					System.out.println("No hay mas movimientos. Empates.");
+					break;
+				}
 				System.out.println("Movimiento jugador 2.");
 				do {
 					coordenadas = leerPosicion();
@@ -57,10 +73,13 @@ public class TestJuego {
 				} while (!movimientoValido);
 				terminado = (t1.comprobar_ganador('X')) || (t1.comprobar_ganador('O'));
 				System.out.println(t1);
+				jugadas++;
+				
+
 			} while (!terminado);
 			if (t1.comprobar_ganador('X')) {
 				System.out.println("Ganador jugador 1");
-			} else {
+			} else if(t1.comprobar_ganador('O')) {
 				System.out.println("Ganador jugador 2");
 			}
 			break;
